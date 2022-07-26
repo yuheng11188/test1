@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0,minimum-scale=1.0 ">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/jQuery.mian.js"></script>
+    <!-- <script src="js/flexible.js"></script> -->
+    <script src="js/echarts.min.js"></script>
+    <style>
+        .tabsbox {
+            width: 800px;
+            height: 400px;
+            border: 1px solid red;
+        }
+        
+        .firstnav {
+            border: 1px solid red;
+            height: 70px;
+        }
+        
+        .firstnav li {
+            float: left;
+            margin-left: 10px;
+            line-height: 70px;
+            width: 70px;
+            height: 70px;
+            border: 1px solid black;
+        }
+        
+        .liactive {
+            background-color: yellow;
+            opacity: 0.3;
+        }
+        
+        .addtab {
+            float: right;
+            font-size: 40px;
+        }
+        
+        .tabscon {
+            margin-top: 50px;
+        }
+        
+        section {
+            display: none;
+        }
+        
+        .tabscon .conactive {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tabsbox" id="tab">
+        <nav class="firstnav">
+            <ul>
+                <li class="liactive"><span>测试1</span><span class="ico">+</span></li>
+                <li><span>测试2</span><span class="ico">+</span></li>
+                <li><span>测试3</span><span class="ico">+</span></li>
+            </ul>
+            <div class="addtab">
+                <span>+</span>
+            </div>
+
+        </nav>
+        <div class="tabscon">
+            <section class="conactive">测试1</section>
+            <section>测试2</section>
+            <section>测试3</section>
+        </div>
+    </div>
+    <script>
+        var that;
+        class Tab {
+
+            constructor(id) {
+                that = this;
+                this.main = document.querySelector(id);
+
+                this.ul = this.main.querySelector('ul')
+
+                this.add = document.querySelector('.addtab');
+                this.fabscon = this.main.querySelector('.tabscon')
+                this.init();
+            }
+            init() {
+                this.upadenode();
+                for (var i = 0; i < this.lis.length; i++) {
+                    this.lis[i].index = i;
+
+                    this.lis[i].onclick = this.toggletab;
+                    this.reduce[i].onclick = this.removetab;
+                };
+                this.add.onclick = this.addtab;
+            }
+            upadenode() {
+                this.lis = this.main.querySelectorAll('li');
+                this.sections = this.main.querySelectorAll('section');
+                this.reduce = this.ul.querySelectorAll('.ico')
+            }
+            toggletab() {
+                that.clearclass();
+                this.className = 'liactive';
+                that.sections[this.index].className = 'conactive'
+            }
+            clearclass() {
+                for (var i = 0; i < this.lis.length; i++) {
+                    this.lis[i].className = '';
+                    this.sections[i].className = ''
+                }
+            }
+            addtab() {
+                that.clearclass();
+                var li = '<li class="liactive"><span>新标签</span><span>+</span></li>';
+                var section = '<section class="conactive">内容3</section>'
+                that.ul.insertAdjacentHTML('beforeend', li);
+                that.fabscon.insertAdjacentHTML('beforeend', section);
+                that.init();
+            }
+            removetab(e) {
+                e.stopPropagation();
+                alert(11)
+            }
+            edittab() {
+
+            }
+        }
+        new Tab('#tab')
+    </script>
+</body>
+
+</html>
